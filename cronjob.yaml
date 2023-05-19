@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  labels:
+    app: durable-cronjob
+  name: durable-cronjob
+  namespace: durablefunctiontest
+spec:
+  schedule: "*/5 * * * *"
+  startingDeadlineSeconds: 180
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: durable-cronjob
+              image: gpmdacr.azurecr.io/testfunctionapp:test_01
+              env:
+                - name: AzureWebJobsStorage
+                  value: DefaultEndpointsProtocol=https;AccountName=stageformuistrg;AccountKey=bgNc275laAd3l3YFPZahqqI6WnDTcEm1CGza/wOaabsJXG0lH4oS/CZ8L9jr+lGEMyYRT2D1Dzp9NesTnOOzVg==;EndpointSuffix=core.windows.net
+              imagePullPolicy: Always
+              resources:
+                requests:
+                  memory: "200Mi"
+                  cpu: ".02"
+                limits:
+                  memory: "400Mi"
+                  cpu: ".3"
+          restartPolicy: OnFailure
+      backoffLimit: 3

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample
+  labels:
+    app: sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample
+  template:
+    metadata:
+      labels:
+        app: sample
+    spec:
+      containers:
+        - name: sample
+          image: vaishnavi15082000/testfunctionapp
+          env:
+            - name: AzureWebJobsStorage
+              value: DefaultEndpointsProtocol=https;AccountName=stageformuistrg;AccountKey=bgNc275laAd3l3YFPZahqqI6WnDTcEm1CGza/wOaabsJXG0lH4oS/CZ8L9jr+lGEMyYRT2D1Dzp9NesTnOOzVg==
+          imagePullPolicy: Always

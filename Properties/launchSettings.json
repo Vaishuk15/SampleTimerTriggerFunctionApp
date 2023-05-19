@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "TestFunctionApp": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7062"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 34741,
+      "useSSL": false
+    }
+  }
+}
